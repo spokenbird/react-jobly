@@ -14,6 +14,12 @@ class Jobly extends Component {
         "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30" +
         "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U"
     }
+    this.addToken = this.addToken.bind(this);
+  }
+
+  addToken(token){
+    this.setState({token});
+    console.log("Added New Token: ", this.state.token)
   }
 
   render() {
@@ -35,7 +41,7 @@ class Jobly extends Component {
                 <Route exact path="/profile"
                   render={routeProps => <ProfileForm {...routeProps} />} />
                 <Route exact path="/login"
-                  render={routeProps => <LoginForm {...routeProps} />} />
+                  render={routeProps => <LoginForm {...routeProps} addToken={this.addToken}/>} />
                 <Redirect to="/" />
               </Switch>
             </BrowserRouter>
