@@ -20,7 +20,7 @@ class CompaniesList extends Component {
     return (
       <div>
         {this.state.companies.map(c => {
-          return <CompanyCard company={c} />
+          return <CompanyCard key={c.handle} company={c} />
         })}
       </div>
     );
