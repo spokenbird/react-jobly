@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Nav from './Nav';
 import LoginForm from './LoginForm';
-import DisplayItems from './DisplayItems';
+import CompaniesList from './CompaniesList';
+import Company from './Company';
+import JobsList from './JobsList';
 import ProfileForm from './ProfileForm';
 import Home from './Home';
 
@@ -33,11 +35,11 @@ class Jobly extends Component {
                 <Route exact path="/"
                   render={() => <Home />} />
                 <Route exact path="/companies"
-                  render={() => <DisplayItems />} />
+                  render={() => <CompaniesList token={this.state.token} />} />
                 <Route exact path="/companies/:id"
-                  render={routeProps => <DisplayItems {...routeProps} />} />
+                  render={routeProps => <Company {...routeProps} />} />
                 <Route exact path="/jobs"
-                  render={() => <DisplayItems />} />
+                  render={() => <JobsList />} />
                 <Route exact path="/profile"
                   render={routeProps => <ProfileForm {...routeProps} />} />
                 <Route exact path="/login"
