@@ -19,36 +19,39 @@ class Jobly extends Component {
     this.addToken = this.addToken.bind(this);
   }
 
-  addToken(token){
-    this.setState({token});
+  addToken(token) {
+    this.setState({ token });
     console.log("Added New Token: ", this.state.token)
   }
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12">
-            <BrowserRouter>
-              <Nav token={this.state.token} />
-              <Switch >
-                <Route exact path="/"
-                  render={() => <Home />} />
-                <Route exact path="/companies"
-                  render={() => <CompaniesList token={this.state.token} />} />
-                <Route exact path="/companies/:id"
-                  render={routeProps => <Company {...routeProps} />} />
-                <Route exact path="/jobs"
-                  render={() => <JobsList />} />
-                <Route exact path="/profile"
-                  render={routeProps => <ProfileForm {...routeProps} />} />
-                <Route exact path="/login"
-                  render={routeProps => <LoginForm {...routeProps} addToken={this.addToken}/>} />
-                <Redirect to="/" />
-              </Switch>
-            </BrowserRouter>
+      <div>
+        <BrowserRouter>
+          <Nav token={this.state.token} />
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-12">
+
+                <Switch >
+                  <Route exact path="/"
+                    render={() => <Home />} />
+                  <Route exact path="/companies"
+                    render={() => <CompaniesList token={this.state.token} />} />
+                  <Route exact path="/companies/:id"
+                    render={routeProps => <Company {...routeProps} />} />
+                  <Route exact path="/jobs"
+                    render={() => <JobsList />} />
+                  <Route exact path="/profile"
+                    render={routeProps => <ProfileForm {...routeProps} />} />
+                  <Route exact path="/login"
+                    render={routeProps => <LoginForm {...routeProps} addToken={this.addToken} />} />
+                  <Redirect to="/" />
+                </Switch>
+              </div>
+            </div>
           </div>
-        </div>
+        </BrowserRouter>
       </div>
     );
   }
