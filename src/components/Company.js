@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import axios from 'axios';
-import JoblyApi from "../JoblyApi";
+import React, { Component } from 'react';
+import JoblyApi from '../JoblyApi';
+import JobCard from './JobCard';
 
 class Company extends Component {
   constructor(props) {
@@ -15,7 +15,6 @@ class Company extends Component {
   async componentDidMount() {
     let company = await JoblyApi.getCompany(this.props.match.params.id);
     this.setState({ company });
-    console.log(this.state.company.jobs);
   }
 
   render() {
@@ -23,11 +22,9 @@ class Company extends Component {
       <div className="my-4">
         <h4>{this.state.company.name}</h4>
         <p>{this.state.company.description}</p>
-        <ul>
           {this.state.company.jobs.map(j => {
-            return <li key>{j.title}</li>
+            return <JobCard job={j} />
           })}
-        </ul>
       </div>
     );
   }

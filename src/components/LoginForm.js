@@ -48,7 +48,7 @@ class LoginForm extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="username">Username</label>
-              <input onChange={this.handleChange} name="username" value={this.state.username} type="text" className="form-control" id="username" name="username" placeholder="Username" />
+              <input onChange={this.handleChange} name="username" value={this.state.username} type="text" className="form-control" id="username" placeholder="Username" />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
@@ -64,7 +64,7 @@ class LoginForm extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="username">Username</label>
-              <input onChange={this.handleChange} name="username" value={this.state.username} type="text" className="form-control" id="username" name="username" placeholder="Username" />
+              <input onChange={this.handleChange} name="username" value={this.state.username} type="text" className="form-control" id="username" placeholder="Username" />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
@@ -72,11 +72,11 @@ class LoginForm extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="first_name">First name</label>
-              <input onChange={this.handleChange} name="first_name" value={this.state.first_name} type="text" className="form-control" id="first_name" name="first_name" placeholder="first_name" />
+              <input onChange={this.handleChange} name="first_name" value={this.state.first_name} type="text" className="form-control" id="first_name" placeholder="first_name" />
             </div>
             <div className="form-group">
               <label htmlFor="last_name">Last name</label>
-              <input onChange={this.handleChange} name="last_name" value={this.state.last_name} type="text" className="form-control" id="last_name" name="last_name" placeholder="last_name" />
+              <input onChange={this.handleChange} name="last_name" value={this.state.last_name} type="text" className="form-control" id="last_name" placeholder="last_name" />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email address</label>

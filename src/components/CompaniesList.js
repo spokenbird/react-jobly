@@ -25,7 +25,7 @@ class CompaniesList extends Component {
 
   async handleSubmit(evt) {
     evt.preventDefault();
-    let companies = await JoblyApi.search(this.state.search);
+    let companies = await JoblyApi.searchCompanies(this.state.search);
     this.setState({ companies });
     console.log("All Companies: ", companies);
   }
@@ -35,7 +35,7 @@ class CompaniesList extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="form-inline my-2">
-          <input onChange={this.handleChange} value={this.state.search} className="form-control col-sm-11" type="search" placeholder="Search" aria-label="Search" name="search" />
+          <input autocomplete="off" onChange={this.handleChange} value={this.state.search} className="form-control col-sm-11" type="search" placeholder="Search" aria-label="Search" name="search" />
           <button className="btn btn-outline-success my-2 col-sm-1" type="submit">Search</button>
         </form>
         {this.state.companies.map(c => {

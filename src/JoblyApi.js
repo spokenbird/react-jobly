@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { builtinModules } from 'module';
 
 class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb = "get") {
@@ -28,9 +27,14 @@ class JoblyApi {
     }
   }
 
-  static async search(query) {
+  static async searchCompanies(query) {
     let res = await this.request(`companies?search=${query}`);
     return res.companies;
+  }
+
+  static async searchJobs(query) {
+    let res = await this.request(`jobs?search=${query}`);
+    return res.jobs;
   }
 
   static async getCompany(handle) {
