@@ -31,11 +31,17 @@ class LoginForm extends Component {
     evt.preventDefault();
     let { username, password, first_name, last_name, email } = this.state;
     if (this.state.login) {
-      let token = await JoblyApi.request('login', { username, password }, 'post');
-      this.props.addToken(token);
+      let { token } = await JoblyApi.request('login', { username, password }, 'post');
+      console.log("token", token)
+      localStorage.setItem("joblyToken", token);
+      this.props.toggleLogin();
+      this.props.history.push('/jobs')
+      console.log("Local Storage:", localStorage)
     } else {
-      let token = await JoblyApi.request('users', { username, password, first_name, last_name, email }, 'post');
-      this.props.addToken(token);
+      let { token } = await JoblyApi.request('users', { username, password, first_name, last_name, email }, 'post');
+      localStorage.setItem("joblyToken", token);
+      this.props.toggleLogin();
+      this.props.history.push('/jobs')
     }
   }
 

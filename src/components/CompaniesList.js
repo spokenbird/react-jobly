@@ -13,8 +13,12 @@ class CompaniesList extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   async componentDidMount() {
-    let companies = await JoblyApi.getCompanies();
-    this.setState({ companies })
+    try{
+      let companies = await JoblyApi.getCompanies();
+      this.setState({ companies })
+    } catch {
+      this.props.history.push('/login');
+    }
   }
 
   handleChange(evt) {
@@ -35,7 +39,7 @@ class CompaniesList extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="form-inline my-2">
-          <input autocomplete="off" onChange={this.handleChange} value={this.state.search} className="form-control col-sm-11" type="search" placeholder="Search" aria-label="Search" name="search" />
+          <input autoComplete="off" onChange={this.handleChange} value={this.state.search} className="form-control col-sm-11" type="search" placeholder="Search" aria-label="Search" name="search" />
           <button className="btn btn-outline-success my-2 col-sm-1" type="submit">Search</button>
         </form>
         {this.state.companies.map(c => {
