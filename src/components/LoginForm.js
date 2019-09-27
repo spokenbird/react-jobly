@@ -78,11 +78,11 @@ class LoginForm extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="first_name">First name</label>
-              <input onChange={this.handleChange} name="first_name" value={this.state.first_name} type="text" className="form-control" id="first_name" placeholder="first_name" />
+              <input onChange={this.handleChange} name="first_name" value={this.state.first_name} type="text" className="form-control" id="first_name" placeholder="First Name" />
             </div>
             <div className="form-group">
               <label htmlFor="last_name">Last name</label>
-              <input onChange={this.handleChange} name="last_name" value={this.state.last_name} type="text" className="form-control" id="last_name" placeholder="last_name" />
+              <input onChange={this.handleChange} name="last_name" value={this.state.last_name} type="text" className="form-control" id="last_name" placeholder="Last Name" />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email address</label>
