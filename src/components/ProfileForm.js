@@ -43,7 +43,6 @@ class ProfileForm extends Component {
     this.setState({
       submitted: true
     });
-    console.log(this.state.submitted);
   }
 
   render() {

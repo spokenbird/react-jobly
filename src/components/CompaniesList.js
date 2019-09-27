@@ -31,7 +31,6 @@ class CompaniesList extends Component {
     evt.preventDefault();
     let companies = await JoblyApi.searchCompanies(this.state.search);
     this.setState({ companies });
-    console.log("All Companies: ", companies);
   }
 
   render() {

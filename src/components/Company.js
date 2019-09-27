@@ -17,7 +17,6 @@ class Company extends Component {
   async componentDidMount() {
     try {
       let company = await JoblyApi.getCompany(this.props.match.params.id);
-      console.log(company);
       let username = localStorage.getItem('joblyUser');
       let user = await JoblyApi.getUser(username);
       let jobsArray = user.jobs.map(uj => {

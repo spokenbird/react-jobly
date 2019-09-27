@@ -18,7 +18,6 @@ class JobsList extends Component {
   async componentDidMount() {
     try {
       let jobs = await JoblyApi.getJobs();
-      console.log(jobs);
       let username = localStorage.getItem('joblyUser');
       let user = await JoblyApi.getUser(username);
       let jobsArray = user.jobs.map(uj => {
