@@ -7,26 +7,47 @@ class JobsList extends Component {
     super(props);
     this.state = {
       jobs: [],
+      jobsDisplayed: [],
+      displayStart: 0,
+      displayEnd: 10,
       search: "",
       applications: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleApply = this.handleApply.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   async componentDidMount() {
     try {
       let jobs = await JoblyApi.getJobs();
+      let jobsDisplayed = jobs.slice(this.state.displayStart, this.state.displayEnd);
       let username = localStorage.getItem('joblyUser');
       let user = await JoblyApi.getUser(username);
       let jobsArray = user.jobs.map(uj => {
         return uj.id
       });
-      this.setState({ jobs, applications: jobsArray });
+      this.setState({ jobs, jobsDisplayed, applications: jobsArray });
+      window.addEventListener('scroll', this.handleScroll);
+      // this.handleScroll();
     } catch {
       this.props.history.push('/login');
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll() {
+      if ((window.innerHeight + window.pageYOffset ) >= document.body.offsetHeight) {
+          this.setState(st => (
+            { displayEnd: st.displayEnd + 10}
+          ));
+          let jobsDisplayed = this.state.jobs.slice(this.state.displayStart, this.state.displayEnd);
+          this.setState({ jobsDisplayed });
+      }
   }
 
   handleChange(evt) {
@@ -54,7 +75,7 @@ class JobsList extends Component {
   render() {
 
     return (
-      <div>
+      <div onScroll={this.handleScroll}>
         <form onSubmit={this.handleSubmit} className="form-inline my-2">
           <input
             autoComplete="off"
@@ -68,7 +89,7 @@ class JobsList extends Component {
           />
           <button className="btn btn-outline-success my-2 col-sm-1" type="submit">Search</button>
         </form>
-        {this.state.jobs.map(j => {
+        {this.state.jobsDisplayed.map(j => {
           return <JobCard
             key={j.id}
             job={j}
