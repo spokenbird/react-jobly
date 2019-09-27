@@ -48,6 +48,11 @@ class JoblyApi {
     let res = await this.request(`jobs`);
     return res.jobs;
   }
+
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
+  }
 }
 
 export default JoblyApi;

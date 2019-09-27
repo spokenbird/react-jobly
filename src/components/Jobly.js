@@ -17,22 +17,19 @@ class Jobly extends Component {
     this.toggleLogin = this.toggleLogin.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let localToken = localStorage.getItem("joblyToken");
-    // PING API for valid current user data
-    // Set user data to local storage
-    // If invalid redirect to home page and show message to 'please log in'
-    if(localToken) this.setState({ loggedIn: true })
+    if (localToken) this.setState({ loggedIn: true });
   }
 
   toggleLogin() {
-    if(this.state.loggedIn){
+    if (this.state.loggedIn) {
       this.setState({ loggedIn: !this.state.loggedIn });
       localStorage.removeItem("joblyToken")
     } else {
       this.setState({ loggedIn: !this.state.loggedIn });
     }
-    
+
   }
 
   render() {
@@ -41,15 +38,13 @@ class Jobly extends Component {
     return (
       <div>
         <BrowserRouter>
-          <Nav token={localToken} toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn}/>
+          <Nav token={localToken} toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
-
                 <Switch >
                   <Route exact path="/"
-                    render={() => <Home />} /> 
-                    {/* ADD welcome back message if logged in and visit home */}
+                    render={() => <Home loggedIn={this.state.loggedIn} />} />
                   <Route exact path="/companies"
                     render={routeProps => <CompaniesList {...routeProps} token={localToken} />} />
                   <Route exact path="/companies/:id"
@@ -58,8 +53,10 @@ class Jobly extends Component {
                     render={routeProps => <JobsList {...routeProps} />} />
                   <Route exact path="/profile"
                     render={routeProps => <ProfileForm {...routeProps} />} />
-                  <Route exact path="/login"
-                    render={routeProps => <LoginForm {...routeProps} toggleLogin={this.toggleLogin}/>} />
+                    {this.state.loggedIn 
+                      ? <Redirect to="/" />
+                      : <Route exact path="/login"
+                        render={routeProps => <LoginForm {...routeProps} toggleLogin={this.toggleLogin} />} /> }
                   <Redirect to="/" />
                 </Switch>
               </div>

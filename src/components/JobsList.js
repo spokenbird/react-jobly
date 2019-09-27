@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
 import JoblyApi from '../JoblyApi';
 import JobCard from './JobCard';
 
@@ -8,15 +7,24 @@ class JobsList extends Component {
     super(props);
     this.state = {
       jobs: [],
-      search: ""
+      search: "",
+      applications: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleApply = this.handleApply.bind(this);
   }
+
   async componentDidMount() {
-    try{
+    try {
       let jobs = await JoblyApi.getJobs();
-      this.setState({ jobs })
+      console.log(jobs);
+      let username = localStorage.getItem('joblyUser');
+      let user = await JoblyApi.getUser(username);
+      let jobsArray = user.jobs.map(uj => {
+        return uj.id
+      });
+      this.setState({ jobs, applications: jobsArray });
     } catch {
       this.props.history.push('/login');
     }
@@ -32,6 +40,16 @@ class JobsList extends Component {
     evt.preventDefault();
     let jobs = await JoblyApi.searchJobs(this.state.search);
     this.setState({ jobs });
+  }
+
+  async handleApply(id) {
+    await JoblyApi.request(`jobs/${id}/apply`, {}, 'post');
+    let username = localStorage.getItem('joblyUser');
+    let user = await JoblyApi.getUser(username);
+    let jobsArray = user.jobs.map(uj => {
+      return uj.id
+    });
+    this.setState({ applications: jobsArray });
   }
 
   render() {
@@ -52,7 +70,12 @@ class JobsList extends Component {
           <button className="btn btn-outline-success my-2 col-sm-1" type="submit">Search</button>
         </form>
         {this.state.jobs.map(j => {
-          return <JobCard key={j.id} job={j} />
+          return <JobCard
+            key={j.id}
+            job={j}
+            applied={this.state.applications}
+            handleApply={this.handleApply}
+          />
         })}
       </div>
     );
