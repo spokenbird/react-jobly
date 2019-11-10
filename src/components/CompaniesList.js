@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import JoblyApi from '../JoblyApi';
 import CompanyCard from './CompanyCard';
-import './CompaniesList.css';
+import Loading from './Loading';
 
 class CompaniesList extends Component {
   constructor(props) {
@@ -45,10 +45,7 @@ class CompaniesList extends Component {
         </form>
         {
           this.state.loading
-            ? <div className="loading-container">
-                <h3>Loading</h3>
-                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-              </div>
+            ? <Loading />
             : this.state.companies.map(c => {
               return <CompanyCard key={c.handle} company={c} />
             })

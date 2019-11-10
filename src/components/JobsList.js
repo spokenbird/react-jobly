@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import JoblyApi from '../JoblyApi';
 import JobCard from './JobCard';
+import Loading from './Loading';
 
 class JobsList extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class JobsList extends Component {
       displayStart: 0,
       displayEnd: 10,
       search: "",
-      applications: []
+      applications: [],
+      loading: true
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +30,7 @@ class JobsList extends Component {
       let jobsArray = user.jobs.map(uj => {
         return uj.id
       });
-      this.setState({ jobs, jobsDisplayed, applications: jobsArray });
+      this.setState({ jobs, jobsDisplayed, applications: jobsArray, loading: false });
       window.addEventListener('scroll', this.handleScroll);
       // this.handleScroll();
     } catch {
@@ -89,14 +91,18 @@ class JobsList extends Component {
           />
           <button className="btn btn-outline-success my-2 col-sm-1" type="submit">Search</button>
         </form>
-        {this.state.jobsDisplayed.map(j => {
-          return <JobCard
-            key={j.id}
-            job={j}
-            applied={this.state.applications}
-            handleApply={this.handleApply}
-          />
-        })}
+        {
+          this.state.loading
+          ? <Loading />
+          : this.state.jobsDisplayed.map(j => {
+              return <JobCard
+                key={j.id}
+                job={j}
+                applied={this.state.applications}
+                handleApply={this.handleApply}
+              />
+            })
+        }
       </div>
     );
   }
