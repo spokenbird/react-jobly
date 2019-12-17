@@ -48,10 +48,9 @@ class LoginForm extends Component {
   render() {
     return (
       this.state.login ?
-        <div>
-          <button className="btn btn-primary" onClick={this.toggleForm}>Login</button>
-          <button className="btn btn-secondary" onClick={this.toggleForm}>Signup</button>
+        <div className="col-md-6 login">
           <form onSubmit={this.handleSubmit}>
+            <h1 className="display-5 text-center mb-3">Jobly</h1>
             <div className="form-group">
               <label htmlFor="username">Username</label>
               <input onChange={this.handleChange} name="username" value={this.state.username} type="text" className="form-control" id="username" placeholder="Username" />
@@ -60,13 +59,13 @@ class LoginForm extends Component {
               <label htmlFor="password">Password</label>
               <input onChange={this.handleChange} name="password" value={this.state.password} type="password" className="form-control" id="password" placeholder="Password" />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <p>New to Jobly? <span className="login-toggle btn-link" onClick={this.toggleForm}>Signup!</span></p>
+            <button type="submit" className="btn btn-primary">Login</button>
           </form>
         </div>
         :
-        <div>
-          <button className="btn btn-secondary" onClick={this.toggleForm}>Login</button>
-          <button className="btn btn-primary" onClick={this.toggleForm}>Signup</button>
+        <div className="col-md-6 login">
+          <h1 className="display-5 text-center mb-3">Jobly</h1>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="username">Username</label>
@@ -87,8 +86,8 @@ class LoginForm extends Component {
             <div className="form-group">
               <label htmlFor="email">Email address</label>
               <input onChange={this.handleChange} name="email" value={this.state.email} type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
+            <p>Already have an account? <span className="login-toggle btn-link" onClick={this.toggleForm}>Login!</span></p>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </div>

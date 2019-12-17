@@ -43,13 +43,13 @@ class JobsList extends Component {
   }
 
   handleScroll() {
-      if ((window.innerHeight + window.pageYOffset ) >= document.body.offsetHeight) {
-          this.setState(st => (
-            { displayEnd: st.displayEnd + 10}
-          ));
-          let jobsDisplayed = this.state.jobs.slice(this.state.displayStart, this.state.displayEnd);
-          this.setState({ jobsDisplayed });
-      }
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+      this.setState(st => (
+        { displayEnd: st.displayEnd + 10 }
+      ));
+      let jobsDisplayed = this.state.jobs.slice(this.state.displayStart, this.state.displayEnd);
+      this.setState({ jobsDisplayed });
+    }
   }
 
   handleChange(evt) {
@@ -78,23 +78,27 @@ class JobsList extends Component {
 
     return (
       <div onScroll={this.handleScroll}>
-        <form onSubmit={this.handleSubmit} className="form-inline my-2">
-          <input
-            autoComplete="off"
-            onChange={this.handleChange}
-            value={this.state.search}
-            className="form-control col-sm-11"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            name="search"
-          />
-          <button className="btn btn-outline-success my-2 col-sm-1" type="submit">Search</button>
+        <form onSubmit={this.handleSubmit} className="form-inline my-4">
+          <div className="input-group col-sm-12 p-0">
+            <input
+              autoComplete="off"
+              onChange={this.handleChange}
+              value={this.state.search}
+              className="form-control"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              name="search"
+            />
+            <div className="input-group-append">
+              <button className="btn btn-outline-success" type="submit">Search</button>
+            </div>
+          </div>
         </form>
         {
           this.state.loading
-          ? <Loading />
-          : this.state.jobsDisplayed.map(j => {
+            ? <Loading />
+            : this.state.jobsDisplayed.map(j => {
               return <JobCard
                 key={j.id}
                 job={j}

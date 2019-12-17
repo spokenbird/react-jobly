@@ -1,11 +1,19 @@
+.navbar {
+    background-color: #888;
+}
+
 .navbar a {
     color: #fff;
+    opacity: 0.8;
 }
 
 .navbar a:active {
-    color: yellow;
+    color: #fff;
+    opacity: 1.0;
+    font-weight: bold;
 }
 
 .navbar a:hover {
-    color: yellow;
+    color:#fff;
+    opacity: 1.0;
 }

@@ -6,12 +6,12 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="container text-center">
-        <h1>Jobly</h1>
-        <p>All the jobs in one, convenient place.</p>
+      <div className="home container text-center">
+        <h1 className="display-4">Jobly</h1>
+        <h4>All the jobs in one, convenient place.</h4>
         { this.props.loggedIn 
           ? <h2>Welcome Back!</h2> 
-          : <Link className="btn btn-primary" to="/login">Log in</Link> 
+          : <Link className="btn btn-primary my-4" to="/login">Log in</Link> 
         }
       </div>
     );

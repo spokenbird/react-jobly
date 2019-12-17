@@ -48,7 +48,7 @@ class ProfileForm extends Component {
   render() {
 
     return (
-      <div>
+      <div className="card p-5 mt-5">
         <h3>Profile</h3>
         {this.state.submitted
           ? <div className="alert alert-success">Profile Updated.</div>

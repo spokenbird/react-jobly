@@ -7,6 +7,7 @@ import Company from './Company';
 import JobsList from './JobsList';
 import ProfileForm from './ProfileForm';
 import Home from './Home';
+import './Jobly.css';
 
 class Jobly extends Component {
   constructor(props) {
@@ -29,36 +30,38 @@ class Jobly extends Component {
     } else {
       this.setState({ loggedIn: !this.state.loggedIn });
     }
-
   }
 
   render() {
     let localToken = localStorage.getItem("joblyToken");
+    let containerClass = localToken ? "" : "jumbotron p-0";
 
     return (
       <div>
         <BrowserRouter>
           <Nav token={localToken} toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
-          <div className="container">
-            <div className="row">
-              <div className="col-sm-12">
-                <Switch >
-                  <Route exact path="/"
-                    render={() => <Home loggedIn={this.state.loggedIn} />} />
-                  <Route exact path="/companies"
-                    render={routeProps => <CompaniesList {...routeProps} token={localToken} />} />
-                  <Route exact path="/companies/:id"
-                    render={routeProps => <Company {...routeProps} />} />
-                  <Route exact path="/jobs"
-                    render={routeProps => <JobsList {...routeProps} />} />
-                  <Route exact path="/profile"
-                    render={routeProps => <ProfileForm {...routeProps} />} />
-                    {this.state.loggedIn 
+          <div className={containerClass}>
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-12">
+                  <Switch >
+                    <Route exact path="/"
+                      render={() => <Home loggedIn={this.state.loggedIn} />} />
+                    <Route exact path="/companies"
+                      render={routeProps => <CompaniesList {...routeProps} token={localToken} />} />
+                    <Route exact path="/companies/:id"
+                      render={routeProps => <Company {...routeProps} />} />
+                    <Route exact path="/jobs"
+                      render={routeProps => <JobsList {...routeProps} />} />
+                    <Route exact path="/profile"
+                      render={routeProps => <ProfileForm {...routeProps} />} />
+                    {this.state.loggedIn
                       ? <Redirect to="/" />
                       : <Route exact path="/login"
-                        render={routeProps => <LoginForm {...routeProps} toggleLogin={this.toggleLogin} />} /> }
-                  <Redirect to="/" />
-                </Switch>
+                        render={routeProps => <LoginForm {...routeProps} toggleLogin={this.toggleLogin} />} />}
+                    <Redirect to="/" />
+                  </Switch>
+                </div>
               </div>
             </div>
           </div>
